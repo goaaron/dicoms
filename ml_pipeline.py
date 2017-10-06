@@ -37,11 +37,11 @@ class ML_Pipeline(object):
 		lstProcess = []
 		gens = []
 		for i in range(int(math.ceil(self.DICOMS.shape[0] // self.batch_size))):
-    		thread = threading.ThreadWithReturnValue(target=self.batch_data)
-    		lstProcess.append(thread)
-    		thread.start()
+			thread = ThreadWithReturnValue(target=self.batch_data)
+			lstProcess.append(thread)
+			thread.start()
 		for thread in lstProcess:
-    		gens.append(thread.join())
+			gens.append(thread.join())
 		for dicom, mask in gens:
 			yield dicom, mask 
 			
